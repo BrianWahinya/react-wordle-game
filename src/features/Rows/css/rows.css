@@ -1,0 +1,12 @@
+.row {
+  display: flex;
+  flex-wrap: nowrap;
+  width: 500px;
+}
+.row .char {
+  padding: 10px;
+  margin: 10px;
+  min-width: 20px;
+  min-height: 20px;
+  background-color: rgba(209, 254, 254, 0.8274509804);
+}
