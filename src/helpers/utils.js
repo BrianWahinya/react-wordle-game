@@ -1,10 +1,10 @@
-const genRandomInt = (min, max) => {
+export const genRandomInt = (min, max) => {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
-const genRandomStr = (length) => {
+export const genRandomStr = (length) => {
   const characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
   let randomStr = "";
   for (let i = 0; i < length; i++) {
