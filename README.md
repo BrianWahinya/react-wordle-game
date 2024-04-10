@@ -8,7 +8,7 @@ The words used are from an external-api
 Still under development:
 
 - [x] Keyboard events
-- [ ] Virtual keyboard
+- [x] Virtual keyboard
 - [ ] Retrieve words from api
 - [ ] Evaluate score
 - [ ] Previous results

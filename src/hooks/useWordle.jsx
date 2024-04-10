@@ -1,5 +1,5 @@
 import { useState } from "react";
-import useKeyboard from "./useKeyboards";
+import useKeyboard from "./useKeyboard";
 
 const useWordle = (target) => {
   const [words, setWords] = useState([]);

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 const useKeyboard = (callback, keyTrigger) => {
   const pressKey = (key) => {
