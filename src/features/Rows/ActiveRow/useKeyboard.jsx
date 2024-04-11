@@ -10,13 +10,15 @@ const useKeyboard = (callback, keyTrigger) => {
         callback(keyLower);
         break;
       default:
-        /^[a-zA-Z]$/.test(keyLower) ? callback(keyLower) : false;
+        return /^[a-zA-Z]$/.test(keyLower) ? callback(keyLower) : false;
     }
   };
 
   const onVirtualKeyClick = (e) => {
-    e.preventDefault();
-    pressKey(e.target.id);
+    if (e?.target?.id) {
+      e.preventDefault();
+      pressKey(e.target.id);
+    }
   };
 
   useEffect(() => {
@@ -27,4 +29,5 @@ const useKeyboard = (callback, keyTrigger) => {
 
   return { onVirtualKeyClick };
 };
+
 export default useKeyboard;

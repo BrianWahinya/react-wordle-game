@@ -1,4 +1,8 @@
+import { useRef } from "react";
+import { VirtualKeyboard } from "../../components";
+import { useRowCtx } from "../../context/RowContext";
 import { genRandomId } from "../../helpers/utils";
+import ActiveRow from "./ActiveRow/ActiveRow";
 import Row from "./Row";
 import "./css/rows.css";
 
@@ -10,19 +14,39 @@ const fillEmptyRows = (amount) => {
   return emptyRows;
 };
 
-const Rows = ({ words, target }) => {
+const Rows = ({ target }) => {
   const options = target.length + 1;
+  const { words } = useRowCtx();
+
+  const virtualKybRef = useRef();
+
+  const click = (e) => {
+    if (virtualKybRef.current) {
+      virtualKybRef.current.onVirtualKeyClick(e);
+    }
+  };
 
   return (
-    <div>
+    <>
       {words.map((word) => (
-        <Row key={genRandomId()} text={word} target={target} />
+        <Row
+          key={genRandomId()}
+          text={word}
+          target={target}
+          type="rowInactive"
+        />
       ))}
 
-      {fillEmptyRows(options - (words.length || 0)).map((_) => (
-        <Row key={genRandomId()} text={""} target={target} />
+      {words?.length < options && (
+        <ActiveRow target={target} ref={virtualKybRef} />
+      )}
+
+      {fillEmptyRows(options - (words.length || 0) - 1).map((_) => (
+        <Row key={genRandomId()} text={""} target={target} type="rowEmpty" />
       ))}
-    </div>
+
+      <VirtualKeyboard click={click} />
+    </>
   );
 };
 export default Rows;

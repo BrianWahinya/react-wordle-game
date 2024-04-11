@@ -1,10 +1,9 @@
-import { useState } from "react";
 import Cell from "./Cell";
 import { genRandomId } from "../../helpers/utils";
 
-const Row = ({ text, target }) => {
+const Row = ({ text, target, type }) => {
   return (
-    <div className="row">
+    <div className={`row ${type}`}>
       {String(text)
         .padEnd(target.length, " ")
         .split("")

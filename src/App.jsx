@@ -1,4 +1,3 @@
-import { useState } from "react";
 import icon_wordle from "./assets/icon_wordle.svg";
 import { WordleGame } from "./features";
 // import './App.css'

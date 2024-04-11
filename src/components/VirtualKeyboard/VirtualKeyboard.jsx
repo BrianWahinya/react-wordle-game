@@ -7,14 +7,14 @@ const lanes = [
   ["delete", "z", "x", "c", "v", "b", "n", "m", "enter"],
 ];
 
-const VirtualKeyboard = ({ onVirtualKeyClick }) => {
+const VirtualKeyboard = ({ click }) => {
   return (
     <div>
       {lanes.map((lane) => (
         <KeyboardRow
           key={`keyboard_row_${genRandomStr(4)}`}
           keys={lane}
-          click={onVirtualKeyClick}
+          click={click}
         />
       ))}
     </div>
