@@ -1,9 +1,11 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { VirtualKeyboard } from "../../components";
 import { useRowCtx } from "../../context/RowContext";
 import { genRandomId } from "../../helpers/utils";
-import ActiveRow from "./ActiveRow/ActiveRow";
+import { useGameCtx } from "../../context/GameContext";
+import ActiveRow from "./ActiveRow";
 import Row from "./Row";
+
 import "./css/rows.css";
 
 const fillEmptyRows = (amount) => {
@@ -15,8 +17,9 @@ const fillEmptyRows = (amount) => {
 };
 
 const Rows = ({ target }) => {
+  const { words, clearList } = useRowCtx();
+
   const options = target.length + 1;
-  const { words } = useRowCtx();
 
   const virtualKybRef = useRef();
 
@@ -25,6 +28,10 @@ const Rows = ({ target }) => {
       virtualKybRef.current.onVirtualKeyClick(e);
     }
   };
+
+  useEffect(() => {
+    clearList();
+  }, [target]);
 
   return (
     <>

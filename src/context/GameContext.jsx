@@ -2,22 +2,35 @@ import { createContext, useContext, useReducer } from "react";
 
 const GameCtx = createContext();
 
+const levels = {
+  basic: [3, 4, 5],
+  intermediate: [5, 6],
+  expert: [7, 8, 9],
+  legendary: [9, 10, 11, 12],
+};
+
 const defaultState = {
+  level: "intermediate",
   scores: {
     won: 0,
     lost: 0,
   },
   points: "",
-  current_target: "",
+  target: "",
 };
 
 const reducer = (state, action) => {
-  switch (action.type) {
+  const { type, payload } = action;
+  switch (type) {
     case "lost":
-      state.lost += 1;
-      return state;
+      return { ...state, lost: state.lost + 1 };
     case "won":
-      state.won += 1;
+      return { ...state, won: state.won + 1 };
+    case "changeLevel":
+      return { ...state, level: payload };
+    case "changeTarget":
+      return { ...state, target: payload };
+    default:
       return state;
   }
 };
@@ -26,15 +39,27 @@ const GameCtxProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, defaultState);
 
   const won = () => {
-    dispatch({ type: "won", payload: state });
+    dispatch({ type: "won" });
   };
 
   const lost = () => {
-    dispatch({ type: "lost", payload: state });
+    dispatch({ type: "lost" });
+  };
+
+  const changeLevel = (level) => {
+    dispatch({ type: "changeLevel", payload: level });
+  };
+
+  const changeTarget = (target) => {
+    dispatch({ type: "changeTarget", payload: target });
   };
 
   return (
-    <GameCtx.Provider value={{ state, won, lost }}>{children}</GameCtx.Provider>
+    <GameCtx.Provider
+      value={{ ...state, won, lost, changeLevel, changeTarget }}
+    >
+      {children}
+    </GameCtx.Provider>
   );
 };
 

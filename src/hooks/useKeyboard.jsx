@@ -15,16 +15,26 @@ const useKeyboard = (callback, keyTrigger) => {
   };
 
   const onVirtualKeyClick = (e) => {
+    // console.log(e);
+    e.preventDefault();
+    e.stopPropagation();
     if (e?.target?.id) {
-      e.preventDefault();
       pressKey(e.target.id);
     }
   };
 
   useEffect(() => {
-    const keyListener = (e) => pressKey(e.key);
-    window.addEventListener("keydown", keyListener);
-    return () => window.removeEventListener("keydown", keyListener);
+    const keyListener = (e) => {
+      // console.log(e);
+      if (e.target.id === "reload" && e.key.toLowerCase() === "enter") {
+        e.preventDefault();
+        return;
+      }
+      pressKey(e.key);
+    };
+
+    document.addEventListener("keydown", keyListener);
+    return () => document.removeEventListener("keydown", keyListener);
   }, [keyTrigger]);
 
   return { onVirtualKeyClick };

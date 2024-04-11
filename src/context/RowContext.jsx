@@ -11,11 +11,11 @@ const reducer = (state, action) => {
   const { type, payload } = action;
   switch (type) {
     case "next":
-      state.position += 1;
-      return state;
+      return { ...state, position: state.position + 1 };
     case "insert":
-      const newState = { ...state, words: [...state.words, payload] };
-      return newState;
+      return { ...state, words: [...state.words, payload] };
+    case "clear":
+      return defaultState;
     default:
       return state;
   }
@@ -32,6 +32,10 @@ const RowCtxProvider = ({ children }) => {
     dispatch({ type: "insert", payload: word });
   };
 
+  const clearList = () => {
+    dispatch({ type: "clear" });
+  };
+
   return (
     <RowCtx.Provider
       value={{
@@ -39,6 +43,7 @@ const RowCtxProvider = ({ children }) => {
         rowPosition: state.position,
         nextRow,
         insertWord,
+        clearList,
       }}
     >
       {children}

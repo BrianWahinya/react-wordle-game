@@ -1,19 +1,27 @@
 import Rows from "./Rows/Rows";
 import { RowCtxProvider } from "../context/RowContext.jsx";
-
-const target = "try";
-// const target = "mwalimu";
+import { useWordle } from "../hooks";
 
 const WordleGame = () => {
+  const { isFetching, isPending, error, data, target, fetchData } = useWordle();
+
   return (
-    <div>
-      <h2>Wordle Game</h2>
-      {
+    <>
+      <div>
         <RowCtxProvider>
-          <Rows target={target} />
+          {!isFetching && !isPending && target ? (
+            <Rows target={target} />
+          ) : (
+            <></>
+          )}
         </RowCtxProvider>
-      }
-    </div>
+      </div>
+      <div>
+        <button id="reload" onClick={fetchData}>
+          Reload
+        </button>
+      </div>
+    </>
   );
 };
 export default WordleGame;

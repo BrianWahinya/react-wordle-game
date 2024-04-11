@@ -1,12 +1,13 @@
 import { useState } from "react";
-import { useRowCtx } from "../../../context/RowContext.jsx";
+import { useRowCtx } from "../context/RowContext.jsx";
+import { useGameCtx } from "../context/GameContext.jsx";
 import useKeyboard from "./useKeyboard.jsx";
 
 const secondaryKeys = ["delete", "backspace", "enter"];
 
 const useActiveRow = (target) => {
-  const [text, setText] = useState("");
   const { words, insertWord, nextRow } = useRowCtx();
+  const [text, setText] = useState("");
   // console.log("words", words);
 
   const formatText = (keyPressed) => {
@@ -40,4 +41,5 @@ const useActiveRow = (target) => {
 
   return { text, onVirtualKeyClick };
 };
+
 export default useActiveRow;
