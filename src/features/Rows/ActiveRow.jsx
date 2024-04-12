@@ -2,13 +2,13 @@ import { forwardRef, useImperativeHandle } from "react";
 import { useActiveRow } from "../../hooks";
 import Row from "./Row";
 
-const ActiveRow = forwardRef(({ target }, ref) => {
-  const { text, onVirtualKeyClick } = useActiveRow(target);
+const ActiveRow = forwardRef((props, ref) => {
+  const { text, onVirtualKeyClick } = useActiveRow();
 
   useImperativeHandle(ref, () => ({
     onVirtualKeyClick,
   }));
 
-  return <Row text={text} target={target} type="rowActive" />;
+  return <Row text={text} type="rowActive" />;
 });
 export default ActiveRow;

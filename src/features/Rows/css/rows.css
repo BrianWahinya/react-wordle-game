@@ -10,9 +10,6 @@
   min-height: 20px;
   background-color: rgba(209, 254, 254, 0.8274509804);
 }
-.row .char:hover {
-  cursor: pointer;
-}
 .row.rowActive .char {
   background-color: #6b91bd;
 }
@@ -26,10 +23,10 @@
   background-color: #66a15d;
 }
 .row.rowInactive .char.estimate {
-  background-color: #a1a15d;
+  background-color: #d3d35f;
 }
 .row.rowInactive .char.invalid {
-  background-color: #c28871;
+  background-color: #e57f71;
 }
 .row.rowEmpty .char {
   background-color: rgba(194, 203, 214, 0.9098039216);

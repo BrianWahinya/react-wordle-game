@@ -5,8 +5,10 @@ import useKeyboard from "./useKeyboard.jsx";
 
 const secondaryKeys = ["delete", "backspace", "enter"];
 
-const useActiveRow = (target) => {
+const useActiveRow = () => {
   const { words, insertWord, nextRow } = useRowCtx();
+  const { target } = useGameCtx();
+
   const [text, setText] = useState("");
   // console.log("words", words);
 

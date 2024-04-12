@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useLayoutEffect, useRef } from "react";
 import { VirtualKeyboard } from "../../components";
 import { useRowCtx } from "../../context/RowContext";
 import { genRandomId } from "../../helpers/utils";
@@ -16,8 +16,9 @@ const fillEmptyRows = (amount) => {
   return emptyRows;
 };
 
-const Rows = ({ target }) => {
+const Rows = () => {
   const { words, clearList } = useRowCtx();
+  const { target } = useGameCtx();
 
   const options = target.length + 1;
 
@@ -29,27 +30,20 @@ const Rows = ({ target }) => {
     }
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     clearList();
   }, [target]);
 
   return (
     <>
       {words.map((word) => (
-        <Row
-          key={genRandomId()}
-          text={word}
-          target={target}
-          type="rowInactive"
-        />
+        <Row key={genRandomId()} text={word} type="rowInactive" />
       ))}
 
-      {words?.length < options && (
-        <ActiveRow target={target} ref={virtualKybRef} />
-      )}
+      {words?.length < options && <ActiveRow ref={virtualKybRef} />}
 
       {fillEmptyRows(options - (words.length || 0) - 1).map((_) => (
-        <Row key={genRandomId()} text={""} target={target} type="rowEmpty" />
+        <Row key={genRandomId()} text={""} type="rowEmpty" />
       ))}
 
       <VirtualKeyboard click={click} />

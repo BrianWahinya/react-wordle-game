@@ -1,4 +1,5 @@
 import { createContext, useContext, useReducer } from "react";
+import configs from "../helpers/configs";
 
 const GameCtx = createContext();
 
@@ -10,7 +11,7 @@ const levels = {
 };
 
 const defaultState = {
-  level: "intermediate",
+  level: configs.activeLevel,
   scores: {
     won: 0,
     lost: 0,

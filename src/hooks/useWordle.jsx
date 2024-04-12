@@ -3,19 +3,16 @@ import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { genRandomInt } from "../helpers/utils.js";
 import { useGameCtx } from "../context/GameContext.jsx";
+import { getWordsByLevel } from "../api/methods.js";
 
 // const target = "example";
 
 const useWordle = () => {
-  const { target, changeTarget } = useGameCtx();
+  const { target, level, changeTarget } = useGameCtx();
 
   const { isPending, error, data, isFetching, refetch } = useQuery({
-    queryKey: ["targetData"],
-    queryFn: () =>
-      axios
-        .get("https://api.datamuse.com/words?sp=*t??k")
-        .then((res) => res.data),
-    // enabled: false,
+    queryKey: ["targetData", level],
+    queryFn: () => getWordsByLevel(level),
   });
   // console.log(data);
 
@@ -26,9 +23,10 @@ const useWordle = () => {
 
   useEffect(() => {
     if (data && !isFetching && !isPending) {
-      const randomIdx = genRandomInt(0, data.length);
-      // console.log(data[randomIdx].word);
-      changeTarget(data[randomIdx].word);
+      const availableWords = data.words;
+      const randomIdx = genRandomInt(0, availableWords.length);
+      console.log(availableWords[randomIdx]);
+      changeTarget(availableWords[randomIdx]);
     }
   }, [isPending, isFetching, data]);
 
