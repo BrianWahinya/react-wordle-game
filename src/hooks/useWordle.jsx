@@ -1,11 +1,8 @@
 import { useEffect } from "react";
-import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { genRandomInt } from "../helpers/utils.js";
 import { useGameCtx } from "../context/GameContext.jsx";
 import { getWordsByLevel } from "../api/methods.js";
-
-// const target = "example";
 
 const useWordle = () => {
   const { target, level, changeTarget } = useGameCtx();
@@ -30,6 +27,13 @@ const useWordle = () => {
     }
   }, [isPending, isFetching, data]);
 
-  return { isFetching, isPending, error, data, target, fetchData };
+  return {
+    isFetching,
+    isPending,
+    error,
+    data,
+    target,
+    fetchData,
+  };
 };
 export default useWordle;
