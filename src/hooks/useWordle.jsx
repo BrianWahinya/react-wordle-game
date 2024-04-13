@@ -5,7 +5,8 @@ import { useGameCtx } from "../context/GameContext.jsx";
 import { getWordsByLevel } from "../api/methods.js";
 
 const useWordle = () => {
-  const { target, level, changeTarget } = useGameCtx();
+  const { target, level, levels, gameStatus, changeTarget, updateGameStatus } =
+    useGameCtx();
 
   const { isPending, error, data, isFetching, refetch } = useQuery({
     queryKey: ["targetData", level],
@@ -15,7 +16,10 @@ const useWordle = () => {
 
   const fetchData = (e) => {
     e.preventDefault();
-    refetch();
+    if (gameStatus !== "ongoing") {
+      refetch();
+      updateGameStatus("ongoing");
+    }
   };
 
   useEffect(() => {
@@ -33,6 +37,8 @@ const useWordle = () => {
     error,
     data,
     target,
+    gameStatus,
+    levels,
     fetchData,
   };
 };

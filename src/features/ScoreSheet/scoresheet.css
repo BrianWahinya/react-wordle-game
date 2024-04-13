@@ -1,0 +1,33 @@
+.divScoresheet {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+}
+.divScoresheet .pGamestatus {
+  padding: 0;
+  margin: 2px 0;
+  font-size: larger;
+  font-weight: bold;
+}
+.divScoresheet .pGamestatus.lost {
+  color: #db3434;
+}
+.divScoresheet .pGamestatus.won {
+  color: #0c7653;
+}
+.divScoresheet h4 {
+  padding: 2px 0;
+  margin: 0;
+}
+.divScoresheet .divScores {
+  display: flex;
+  gap: 30px;
+}
+.divScoresheet .divScores .pScoresheet {
+  padding: 2px 0;
+  margin: 5px 0px;
+}
+.divScoresheet .divScores .pScoresheet .pLevel {
+  text-transform: capitalize;
+  text-decoration: underline;
+}

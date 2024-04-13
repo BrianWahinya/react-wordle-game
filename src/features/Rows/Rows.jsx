@@ -18,7 +18,7 @@ const fillEmptyRows = (amount) => {
 
 const Rows = () => {
   const { words, clearList } = useRowCtx();
-  const { target } = useGameCtx();
+  const { target, gameStatus } = useGameCtx();
 
   const options = target.length + 1;
 
@@ -34,15 +34,20 @@ const Rows = () => {
     clearList();
   }, [target]);
 
+  const emptyRowsAmount =
+    options - words.length - (gameStatus === "ongoing" ? 1 : 0);
+
   return (
     <>
       {words.map((word) => (
         <Row key={genRandomId()} text={word} type="rowInactive" />
       ))}
 
-      {words?.length < options && <ActiveRow ref={virtualKybRef} />}
+      {words?.length < options && gameStatus === "ongoing" && (
+        <ActiveRow ref={virtualKybRef} />
+      )}
 
-      {fillEmptyRows(options - (words.length || 0) - 1).map((_) => (
+      {fillEmptyRows(emptyRowsAmount).map((_) => (
         <Row key={genRandomId()} text={""} type="rowEmpty" />
       ))}
 

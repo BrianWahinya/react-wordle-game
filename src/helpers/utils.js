@@ -20,3 +20,5 @@ export const genRandomId = () => {
   const randomStr = genRandomStr(3);
   return `${timestamp}_${randomStr}_${randomInt}`;
 };
+
+export const deepCopy = (obj) => JSON.parse(JSON.stringify(obj));

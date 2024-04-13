@@ -7,7 +7,7 @@ const secondaryKeys = ["delete", "backspace", "enter"];
 
 const useActiveRow = () => {
   const { words, insertWord, nextRow } = useRowCtx();
-  const { target } = useGameCtx();
+  const { target, gameStatus, updateGameStatus } = useGameCtx();
 
   const [text, setText] = useState("");
   // console.log("words", words);
@@ -23,8 +23,18 @@ const useActiveRow = () => {
         setText((prev) => prev.slice(0, -1));
         break;
       case "enter":
-        if (text.length === target.length && words.length < target.length + 1) {
+        if (
+          text.length === target.length &&
+          words.length < target.length + 1 &&
+          gameStatus === "ongoing"
+        ) {
           insertWord(text);
+          if (text === target) {
+            updateGameStatus("won");
+          }
+          if (text !== target && words.length === target.length) {
+            updateGameStatus("lost");
+          }
           nextRow();
           setText("");
         }
@@ -32,7 +42,8 @@ const useActiveRow = () => {
       default:
         if (
           !secondaryKeys.includes(keyPressed) &&
-          text.length < target.length
+          text.length < target.length &&
+          gameStatus === "ongoing"
         ) {
           setText((prev) => `${prev}${keyPressed}`);
         }

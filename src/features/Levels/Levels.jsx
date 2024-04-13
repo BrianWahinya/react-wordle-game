@@ -1,12 +1,13 @@
 import { useGameCtx } from "../../context/GameContext";
 
 const Levels = () => {
-  const { level, changeLevel } = useGameCtx();
+  const { level, changeLevel, updateGameStatus } = useGameCtx();
 
   const selectLevel = (e) => {
     e.preventDefault();
     if (e.target.value) {
       changeLevel(e.target.value.toLowerCase());
+      updateGameStatus("ongoing");
     }
   };
 

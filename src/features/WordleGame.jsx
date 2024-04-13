@@ -2,6 +2,7 @@ import Rows from "./Rows/Rows";
 import { RowCtxProvider } from "../context/RowContext.jsx";
 import { useWordle } from "../hooks";
 import Levels from "./Levels/Levels.jsx";
+import ScoreSheet from "./ScoreSheet/ScoreSheet.jsx";
 
 const WordleGame = () => {
   const { isFetching, isPending, target, fetchData } = useWordle();
@@ -18,8 +19,9 @@ const WordleGame = () => {
       </div>
       <div>
         <button id="reload" onClick={fetchData}>
-          Reload
+          Next
         </button>
+        <ScoreSheet />
       </div>
     </>
   );
