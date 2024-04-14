@@ -13,7 +13,8 @@ const ScoreSheet = () => {
       <h4>Scoresheet</h4>
       <div className="divScores">
         {Object.keys(configs.api.levels).map((lvl, idx) => {
-          const { won, lost } = levels[lvl];
+          const { won, lost, history } = levels[lvl];
+          //   console.log(history);
           return (
             <p key={`${lvl}-${idx}`} className="pScoresheet">
               <span className="pLevel">{lvl}</span>

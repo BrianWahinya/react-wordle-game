@@ -6,3 +6,9 @@ export const getWordsByLevel = (level) =>
     // console.log("res", res.data);
     return res.data;
   });
+
+export const getCheckWordIsValid = (level) =>
+  axios.get(`${configs.api.levels[level]}`).then((res) => {
+    // console.log("res", res.data);
+    return res.data;
+  });

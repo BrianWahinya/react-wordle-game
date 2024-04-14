@@ -4,6 +4,7 @@ const RowCtx = createContext();
 
 const defaultState = {
   position: 0,
+  invalidText: false,
   words: [],
 };
 
@@ -14,6 +15,8 @@ const reducer = (state, action) => {
       return { ...state, position: state.position + 1 };
     case "insert":
       return { ...state, words: [...state.words, payload] };
+    case "invalidText":
+      return { ...state, invalidText: payload };
     case "clear":
       return defaultState;
     default:
@@ -28,6 +31,10 @@ const RowCtxProvider = ({ children }) => {
     dispatch({ type: "next" });
   };
 
+  const isTextInvalid = (status) => {
+    dispatch({ type: "invalidText", payload: status });
+  };
+
   const insertWord = (word) => {
     dispatch({ type: "insert", payload: word });
   };
@@ -39,11 +46,12 @@ const RowCtxProvider = ({ children }) => {
   return (
     <RowCtx.Provider
       value={{
-        words: state.words,
+        ...state,
         rowPosition: state.position,
         nextRow,
         insertWord,
         clearList,
+        isTextInvalid,
       }}
     >
       {children}

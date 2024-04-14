@@ -5,10 +5,10 @@ import { deepCopy } from "../helpers/utils";
 const GameCtx = createContext();
 
 const levels = {
-  basic: { won: 0, lost: 0 },
-  intermediate: { won: 0, lost: 0 },
-  expert: { won: 0, lost: 0 },
-  legendary: { won: 0, lost: 0 },
+  basic: { won: 0, lost: 0, history: [] },
+  intermediate: { won: 0, lost: 0, history: [] },
+  expert: { won: 0, lost: 0, history: [] },
+  legendary: { won: 0, lost: 0, history: [] },
 };
 
 // gameStatus: ongoing, won, lost
@@ -17,10 +17,6 @@ const defaultState = {
   level: configs.activeLevel,
   gameStatus: "ongoing",
   levels,
-  scores: {
-    won: 0,
-    lost: 0,
-  },
   points: "",
   target: "",
 };
@@ -31,17 +27,40 @@ const reducer = (state, action) => {
     case "lost":
       const stateLost = deepCopy(state);
       stateLost.levels[stateLost.level].lost += 1;
+      stateWon.levels[stateWon.level].history.push({ [stateLost.target]: 0 });
       return stateLost;
     case "won":
       const stateWon = deepCopy(state);
       stateWon.levels[stateWon.level].won += 1;
+      stateWon.levels[stateWon.level].history.push({
+        [stateWon.target]: payload,
+      });
       return stateWon;
     case "changeLevel":
       return { ...state, level: payload };
     case "changeTarget":
       return { ...state, target: payload };
     case "changeGameStatus":
-      return { ...state, gameStatus: payload };
+      const stateNew = deepCopy(state);
+      const { status, countTrials } = payload;
+
+      if (status === "won") {
+        stateNew.levels[stateNew.level].won += 1;
+        stateNew.levels[stateNew.level].history.push({
+          [stateNew.target]: countTrials,
+        });
+      }
+
+      if (status === "lost") {
+        stateNew.levels[stateNew.level].lost += 1;
+        stateNew.levels[stateNew.level].history.push({
+          [stateNew.target]: 0,
+        });
+      }
+
+      stateNew.gameStatus = status;
+
+      return stateNew;
     default:
       return state;
   }
@@ -50,8 +69,8 @@ const reducer = (state, action) => {
 const GameCtxProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, defaultState);
 
-  const won = () => {
-    dispatch({ type: "won" });
+  const won = (count) => {
+    dispatch({ type: "won", payload: count });
   };
 
   const lost = () => {
@@ -66,10 +85,8 @@ const GameCtxProvider = ({ children }) => {
     dispatch({ type: "changeTarget", payload: target });
   };
 
-  const updateGameStatus = (status) => {
-    if (status === "won") won();
-    if (status === "lost") lost();
-    dispatch({ type: "changeGameStatus", payload: status });
+  const updateGameStatus = (status, countTrials) => {
+    dispatch({ type: "changeGameStatus", payload: { status, countTrials } });
   };
 
   return (

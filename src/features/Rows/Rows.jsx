@@ -17,7 +17,7 @@ const fillEmptyRows = (amount) => {
 };
 
 const Rows = () => {
-  const { words, clearList } = useRowCtx();
+  const { words, invalidText, clearList } = useRowCtx();
   const { target, gameStatus } = useGameCtx();
 
   const options = target.length + 1;
@@ -50,7 +50,7 @@ const Rows = () => {
       {fillEmptyRows(emptyRowsAmount).map((_) => (
         <Row key={genRandomId()} text={""} type="rowEmpty" />
       ))}
-
+      {invalidText && <p>Invalid Word: Insert and English word</p>}
       <VirtualKeyboard click={click} />
     </>
   );
