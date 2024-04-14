@@ -54,7 +54,7 @@ const Rows = () => {
       </div>
 
       {invalidText && (
-        <p className="pInvalid">Invalid Word: Insert and English word</p>
+        <p className="pInvalid">Please insert a valid English word</p>
       )}
       <VirtualKeyboard click={click} />
     </>

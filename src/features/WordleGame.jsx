@@ -3,6 +3,7 @@ import { RowCtxProvider } from "../context/RowContext.jsx";
 import { useWordle } from "../hooks";
 import Levels from "./Levels/Levels.jsx";
 import ScoreSheet from "./ScoreSheet/ScoreSheet.jsx";
+import { Loader } from "../components";
 
 const WordleGame = () => {
   const { isFetching, isPending, target, gameStatus, fetchData } = useWordle();
@@ -14,6 +15,7 @@ const WordleGame = () => {
       </div>
       <div className="divGame">
         <RowCtxProvider>
+          {(isFetching || isPending) && <Loader />}
           {!isFetching && !isPending && target ? <Rows /> : <></>}
         </RowCtxProvider>
       </div>

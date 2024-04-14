@@ -1,7 +1,9 @@
+const storedData = JSON.parse(localStorage.getItem("wordle-game"));
+
 const configs = {
   lang: "en",
   theme: "light",
-  activeLevel: "basic",
+  activeLevel: storedData?.level || "basic",
   api: {
     levels: {
       basic: "data/basic.json",

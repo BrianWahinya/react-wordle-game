@@ -3,12 +3,15 @@ import configs from "../../helpers/configs";
 import "./scoresheet.css";
 
 const ScoreSheet = () => {
-  const { levels, gameStatus } = useGameCtx();
+  const { levels, gameStatus, target } = useGameCtx();
 
   return (
     <div className="divScoresheet">
       {gameStatus !== "ongoing" && (
-        <p className={`pGamestatus ${gameStatus}`}>{gameStatus}</p>
+        <p className={`pGamestatus ${gameStatus}`}>
+          {gameStatus === "won" && <span>Kudos &#128526;</span>}
+          {gameStatus === "lost" && <span>&#128557; It is: {target}</span>}
+        </p>
       )}
       <h4>Scoresheet</h4>
       <div className="divScores">

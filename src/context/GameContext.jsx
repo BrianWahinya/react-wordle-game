@@ -13,10 +13,12 @@ const levels = {
 
 // gameStatus: ongoing, won, lost
 
+const storedData = JSON.parse(localStorage.getItem("wordle-game"));
+
 const defaultState = {
   level: configs.activeLevel,
   gameStatus: "ongoing",
-  levels,
+  levels: storedData.levels || levels,
   points: "",
   target: "",
 };
@@ -37,9 +39,16 @@ const reducer = (state, action) => {
       });
       return stateWon;
     case "changeLevel":
-      return { ...state, level: payload };
+      localStorage.setItem(
+        "wordle-game",
+        JSON.stringify({
+          ...deepCopy(state),
+          level: payload,
+        })
+      );
+      return { ...deepCopy(state), level: payload };
     case "changeTarget":
-      return { ...state, target: payload };
+      return { ...deepCopy(state), target: payload };
     case "changeGameStatus":
       const stateNew = deepCopy(state);
       const { status, countTrials } = payload;
@@ -57,6 +66,14 @@ const reducer = (state, action) => {
           [stateNew.target]: 0,
         });
       }
+
+      localStorage.setItem(
+        "wordle-game",
+        JSON.stringify({
+          level: stateNew.level,
+          levels: stateNew.levels,
+        })
+      );
 
       stateNew.gameStatus = status;
 

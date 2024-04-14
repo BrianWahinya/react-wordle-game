@@ -11,6 +11,9 @@ const useWordle = () => {
   const { isPending, error, data, isFetching, refetch } = useQuery({
     queryKey: ["targetData", level],
     queryFn: () => getWordsByLevel(level),
+    staleTime: Infinity,
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
   });
   // console.log(data);
 
