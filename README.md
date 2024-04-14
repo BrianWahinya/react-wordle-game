@@ -1,6 +1,6 @@
 ## React Wordle Game
 
-<!-- [Wordle Game website](https://brian-react-wordle-game.netlify.app/) -->
+[Wordle Game website](https://brian-react-wordle-game.netlify.app/)
 
 This app uses browser local-storage to persist data.
 The words used are from an external-api
