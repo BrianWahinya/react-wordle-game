@@ -1,6 +1,6 @@
 const KeyboardKey = ({ char, click }) => {
   return (
-    <button id={`${char}`} onClick={click}>
+    <button className="btnVirtualKeyboard" id={`${char}`} onClick={click}>
       {char}
     </button>
   );

@@ -9,11 +9,12 @@ Still under development:
 
 - [x] Keyboard events
 - [x] Virtual keyboard
-- [ ] Retrieve words from api
-- [ ] Evaluate score
-- [ ] Previous results
+- [x] Retrieve words from api
+- [ ] Store data in local-storage
+- [ ] Evaluate score-points
+- [x] Previous results
 - [ ] Hints
-- [ ] Level modes: basic, intermediate, expert, legendary
+- [x] Level modes: basic, intermediate, expert, legendary
 - [ ] Instructions
 - [ ] Multilingual
 - [ ] Styling

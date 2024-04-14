@@ -1,0 +1,14 @@
+.divKeyboard {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.divKeyboard .btnVirtualKeyboard {
+  margin: auto 3px;
+}
+.divKeyboard .btnVirtualKeyboard#enter {
+  background-color: rgba(49, 49, 108, 0.1921568627);
+}
+.divKeyboard .btnVirtualKeyboard#delete {
+  background-color: rgba(105, 36, 67, 0.3529411765);
+}

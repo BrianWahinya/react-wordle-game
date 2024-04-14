@@ -1,33 +1,43 @@
-.row {
+.divRows {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 5px;
+}
+.divRows .row {
   display: flex;
   flex-wrap: nowrap;
   width: 500px;
+  justify-content: center;
+  align-items: center;
 }
-.row .char {
+.divRows .row .char {
   padding: 10px;
   margin: 5px;
   min-width: 20px;
   min-height: 20px;
   background-color: rgba(209, 254, 254, 0.8274509804);
+  border-radius: 3px;
 }
-.row.rowActive .char {
+.divRows .row.rowActive .char {
   background-color: #6b91bd;
 }
-.row.rowActive .char:hover {
+.divRows .row.rowActive .char:hover {
   cursor: pointer;
 }
-.row.rowInactive .char {
+.divRows .row.rowInactive .char {
   background-color: #a5bdd9;
 }
-.row.rowInactive .char.exact {
+.divRows .row.rowInactive .char.exact {
   background-color: #66a15d;
 }
-.row.rowInactive .char.estimate {
+.divRows .row.rowInactive .char.estimate {
   background-color: #d3d35f;
 }
-.row.rowInactive .char.invalid {
+.divRows .row.rowInactive .char.invalid {
   background-color: #e57f71;
 }
-.row.rowEmpty .char {
+.divRows .row.rowEmpty .char {
   background-color: rgba(194, 203, 214, 0.9098039216);
 }

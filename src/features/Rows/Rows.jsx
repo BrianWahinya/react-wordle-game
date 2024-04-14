@@ -39,18 +39,23 @@ const Rows = () => {
 
   return (
     <>
-      {words.map((word) => (
-        <Row key={genRandomId()} text={word} type="rowInactive" />
-      ))}
+      <div className="divRows">
+        {words.map((word) => (
+          <Row key={genRandomId()} text={word} type="rowInactive" />
+        ))}
 
-      {words?.length < options && gameStatus === "ongoing" && (
-        <ActiveRow ref={virtualKybRef} />
+        {words?.length < options && gameStatus === "ongoing" && (
+          <ActiveRow ref={virtualKybRef} />
+        )}
+
+        {fillEmptyRows(emptyRowsAmount).map((_) => (
+          <Row key={genRandomId()} text={""} type="rowEmpty" />
+        ))}
+      </div>
+
+      {invalidText && (
+        <p className="pInvalid">Invalid Word: Insert and English word</p>
       )}
-
-      {fillEmptyRows(emptyRowsAmount).map((_) => (
-        <Row key={genRandomId()} text={""} type="rowEmpty" />
-      ))}
-      {invalidText && <p>Invalid Word: Insert and English word</p>}
       <VirtualKeyboard click={click} />
     </>
   );

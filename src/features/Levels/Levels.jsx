@@ -1,4 +1,5 @@
 import { useGameCtx } from "../../context/GameContext";
+import "./css/levels.css";
 
 const Levels = () => {
   const { level, changeLevel, updateGameStatus } = useGameCtx();

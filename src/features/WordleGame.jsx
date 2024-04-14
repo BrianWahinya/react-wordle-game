@@ -5,22 +5,24 @@ import Levels from "./Levels/Levels.jsx";
 import ScoreSheet from "./ScoreSheet/ScoreSheet.jsx";
 
 const WordleGame = () => {
-  const { isFetching, isPending, target, fetchData } = useWordle();
+  const { isFetching, isPending, target, gameStatus, fetchData } = useWordle();
 
   return (
     <>
-      <div>
+      <div className="divLevels">
         <Levels />
       </div>
-      <div>
+      <div className="divGame">
         <RowCtxProvider>
           {!isFetching && !isPending && target ? <Rows /> : <></>}
         </RowCtxProvider>
       </div>
       <div>
-        <button id="reload" onClick={fetchData}>
-          Next
-        </button>
+        {gameStatus !== "ongoing" && (
+          <button className="btnNext" id="reload" onClick={fetchData}>
+            Next
+          </button>
+        )}
         <ScoreSheet />
       </div>
     </>

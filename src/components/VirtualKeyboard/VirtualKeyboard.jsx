@@ -1,5 +1,6 @@
 import { genRandomStr } from "../../helpers/utils";
 import KeyboardRow from "./KeyboardRow";
+import "./css/virtualkeyboard.css";
 
 const lanes = [
   ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
@@ -9,7 +10,7 @@ const lanes = [
 
 const VirtualKeyboard = ({ click }) => {
   return (
-    <div>
+    <div className="divKeyboard">
       {lanes.map((lane) => (
         <KeyboardRow
           key={`keyboard_row_${genRandomStr(4)}`}
