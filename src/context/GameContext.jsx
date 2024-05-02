@@ -18,7 +18,7 @@ const storedData = JSON.parse(localStorage.getItem("wordle-game"));
 const defaultState = {
   level: configs.activeLevel,
   gameStatus: "ongoing",
-  levels: storedData.levels || levels,
+  levels: storedData?.levels || levels,
   points: "",
   target: "",
 };

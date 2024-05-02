@@ -10,7 +10,7 @@ Still under development:
 - [x] Keyboard events
 - [x] Virtual keyboard
 - [x] Retrieve words from api
-- [ ] Store data in local-storage
+- [x] Store data in local-storage
 - [ ] Evaluate score-points
 - [x] Previous results
 - [ ] Hints
